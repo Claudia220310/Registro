@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Información de Usuarios</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Información de Usuarios Registrados</h2>
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Foto</th>
+                    <th>Video</th>
+                    <th>Archivo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.id }}</td>
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.password }}</td>
+                    <td>
+                        {% if usuario.foto %}
+                            <img src="{{ usuario.foto.url }}" alt="Foto de {{ usuario.nombre }}" width="100">
+                        {% else %}
+                            Sin foto
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if usuario.video %}
+                            <a href="{{ usuario.video.url }}" target="_blank">Ver Video</a>
+                        {% else %}
+                            Sin video
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if usuario.archivo %}
+                            <a href="{{ usuario.archivo.url }}" target="_blank">Descargar Archivo</a>
+                        {% else %}
+                            Sin archivo
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'registro' %}" class="btn btn-secondary w-100 mt-3">Regresar</a>
+    </div>
+</body>
+</html>
