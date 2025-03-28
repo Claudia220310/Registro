@@ -36,8 +36,13 @@ SECRET_KEY = 'django-insecure-e_^$^f%me&k%&3=ko)2#3x8(i@f7z8jgax&!gnt3pen^zjb0%*
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "*"
+    'claudiare.azurewebsites.net', 
+    'localhost', 
+    '127.0.0.1',
+
 ]
+
+CSRF_TRUSTED_ORIGINS = ['https://claudiare.azurewebsites.net']
 
 
 # Application definition
