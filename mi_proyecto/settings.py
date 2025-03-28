@@ -98,11 +98,14 @@ tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': tmpPostgres.path.replace('/', ''),
-        'USER': tmpPostgres.username,
-        'PASSWORD': tmpPostgres.password,
-        'HOST': tmpPostgres.hostname,
-        'PORT': 5432,
+        'NAME': 'djangoclaudiadb',
+        'USER': 'Claudia',
+        'PASSWORD': 'Pato1234.',
+        'HOST': 'djangowebdb.postgres.database.azure.com',
+        'PORT': '5432',
+        'OPTIONS':{
+            'sslmode': 'require',
+        },
     }
 }
 
