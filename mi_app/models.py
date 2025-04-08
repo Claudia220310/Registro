@@ -33,8 +33,8 @@ def actualizar_archivo(sender, instance, **kwargs):
         return
 
     try:
-        old_instance =  FileArchivo.objects.get(pk=instance.pk)
-        if  old_instance.archivo and   old_instance.archivo != instance.archivo:
+        old_instance = FileArchivo.objects.get(pk=instance.pk)
+        if  old_instance.archivo and old_instance.archivo != instance.archivo:
             old_instance.archivo.delete(save=False)
 
     except FileArchivo.DoesNotExist:
