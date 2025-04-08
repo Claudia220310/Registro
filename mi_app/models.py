@@ -21,3 +21,26 @@ class Gif(models.Model):
     def __str__(self):
         return self.nombre
 
+ @receiver(post_delete, sender=FileArchivo)
+ def eliminar_archivo(sender, instance, **kwargs):
+    if instance.archivo:
+        instance.archivo.delete(False)
+
+
+@receiver(pre_save, sender=FileArchivo)
+def actualizar_archivo(sender, instance, **kwargs):
+    if not instance.pk:
+        return
+
+    try:
+        old_instance =  FileArchivo.objects.get(pk=instance.pk)
+        if  old_instance.archivo and   old_instance.archivo != instance.archivo:
+            old_instance.archivo.delete(save=False)
+
+    except FileArchivo.DoesNotExist:
+        pass        
+    
+        
+     
+        
+
