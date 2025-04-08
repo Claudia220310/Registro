@@ -9,17 +9,13 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
-from pathlib import Path
-import os
-from pathlib import Path
 # Add these at the top of your settings.py
-import os
+from pathlib import Path
+import os import getenv
 from dotenv import load_dotenv
 from urllib.parse import urlparse
 
-
-
+load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -133,7 +129,22 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+STORAGES={
+    "default":{
+        "BACKEND": "storages.backends.azure_storage.AzureStorage",
+        "OPTIONS":{
+            'timeout': 20,
+            'expiration_secs': 500,
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
 
+AZURE_CONTAINER = os.getenv("AZURE_CONTAINER")
+AZURE_ACCOUNT_NAME = os.getenv("AZURE_ACCOUNT_NAME")
+AZURE_ACCOUNT_KEY = os.getenv("AZURE_ACCOUNT_KEY")
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
